@@ -14,7 +14,7 @@ For the build step, this is what happens:
 First we will review these different kinds of recipes, and then we will show you how to do this build step (when you get errors of some kind).
 
 ## The Docker Recipe
-If you are familar with Docker, you will know that the [Dockerfile](https://github.com/vsoch/example.scif/blob/master/Dockerfile) is the recipe for building our container. You will also notice the installation is simple - we start with a container base that was equivalently used by the creator of the pipeline with system / host dependencies, and then simply install the SCIF recipe to it. That comes down to these three commands:
+If you are familar with Docker, you will know that the [Dockerfile]({{ site.github }}/blob/master/Dockerfile) is the recipe for building our container. You will also notice the installation is simple - we start with a container base that was equivalently used by the creator of the pipeline with system / host dependencies, and then simply install the SCIF recipe to it. That comes down to these three commands:
 
 ```
 RUN /usr/local/bin/pip install scif    # Install scif from pypi
@@ -25,7 +25,7 @@ RUN scif install /recipe.scif          # Install it to the container
 We could build this via an automated build by connecting it to Docker Hub (so other users don't need to also build the container locally) or we can build locally ourselves:
 
 ```
-docker build -t vanessa/example.scif .
+docker build -t {{ site.container_name }} .
 ```
 
 ## A Singularity Recipe?
@@ -33,8 +33,8 @@ You'll notice that we don't have a Singularity recipe in this repository, and th
 if we just build a Docker container, we kill two birds with one stone.  For your FYI, to build a Singularity container from Docker you can do any of the following:
 
 ```bash
-singularity pull --name container.simg docker://vanessa/example.scif
-singularity build container.simg docker://vanessa/example.scif
+singularity pull --name container.simg docker://{{ site.container_name }}
+singularity build container.simg docker://{{ site.container_name }}
 ```
 
 
@@ -68,16 +68,16 @@ happen in context of the application folder under `/scif/apps/<appname>` and tha
 If you've already written steps in your recipe and some of them are erroring out, you can comment out these steps that trigger the error, and then build the container. You can also choose to completely comment out the `scif install ...` and create the directories manually to just test commands (`mkdir -p /scif/apps/<appname>`). This will build the container base without installing applications. Either way, when you are ready to build the container:
 
 ```
-docker build -t vanessa/example.scif .
+docker build -t {{ site.container_name }} .
 ```
 
 you can then shell inside:
 
 ```bash
-docker run -it --entrypoint bash vanessa/example.scif
+docker run -it --entrypoint bash {{ site.container_name }}
 ```
 
-And manually run commands to test. When you are happy with a command, write it into your [recipe.scif](https://github.com/vsoch/example.scif/blob/master/recipe.scif). Keep in mind
+And manually run commands to test. When you are happy with a command, write it into your [recipe.scif]({{ site.github }}/blob/master/recipe.scif). Keep in mind
 that during the actual install, the present working directory will always be `/scif/apps/<appname>` and the environment (`%env` section) will be sourced. The folders "bin" and
 "lib" will also exist for you in the `$SCIF_APPROOT` environment variable. Actually, there are [lots of environment variables](https://sci-f.github.io///spec-v1#environment-namespace) that you can use!
 
@@ -85,7 +85,7 @@ When you are done, always be sure to do a final build from start to finish with 
 
 
 ```bash
-docker build -t --no-cache vanessa/example.scif
+docker build -t --no-cache {{ site.container_name }}
 ```
 
 The cache can get in the way if, for example, you are using a remote resource (and the command in the file has changed) but the resource has.  At this point, you can read more about [interacting with your scif](usage) container, or go straight to best practices for [testing](testing).

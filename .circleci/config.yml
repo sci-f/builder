@@ -5,10 +5,11 @@ jobs:
     environment:
       - TZ: "/usr/share/zoneinfo/America/Los_Angeles"
       - CONTAINER_NAME: "vanessa/example.scif"
+      - REPO_BASE: "builder"
 
     docker:
       - image: docker:18.01.0-ce-git
-    working_directory: /tmp/src/example.scif
+    working_directory: /tmp/src/${BUILDER}
     steps:
       - run:
           name: Install parallel gzip and python3

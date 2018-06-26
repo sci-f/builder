@@ -1,12 +1,14 @@
 ---
-title: About Encode DCC
+title: About
 sidebar: main_sidebar
 permalink: about
 toc: false
 ---
 
-This is a tool provided by the Data Coordination effort of the Encode Project.
-You can read more about the project <a href="https://www.genome.gov/10005107/the-encode-project-encyclopedia-of-dna-elements/" class="no-after" target="_blank">here</a>.
+This tool intends to make it easier for researchers (and those that might not have
+experienced with using continuous integration, or building containers) to build, test,
+and deploy a reproducible container.
+
 
 ## The Scientific Filesystem
 

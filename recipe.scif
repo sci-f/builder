@@ -1,43 +1,38 @@
-%apprun samtools
-    exec /usr/bin/samtools "$@"
-%appinstall samtools
-    apt-get update && apt-get install -y samtools
-%apphelp samtools
-    This app provides Samtools suite
-%applabels samtools
-    VERSION 1.7
-    URL http://www.htslib.org/
-%apptest samtools
-    exec /usr/bin/samtools "$@"
+%apprun md5sum
+    exec md5sum "$@"
+%apphelp md5sum
+    This app provides an entrypoint to the md5sum tool, already included in Ubuntu!
+    docker run vanessa/cowsay run md5sum
+%apptest md5sum
+    exec md5sum "$@"
 
+%appenv cowsay
+    export PATH=/usr/games:$PATH
+%applabels cowsay
+    THECOWSAYS MOO
+%appinstall cowsay
+    apt-get update && apt-get install -y cowsay
+%apptest cowsay
+    exec cowsay "$@"
 
-%applabels bowtie
-    VERSION 2.2.7
-%appinstall bowtie
-    curl -Lk -o bowtie.zip https://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.2.7/bowtie2-2.2.7-linux-x86_64.zip/download
-    unzip bowtie.zip
-    mv bowtie2-2.2.7/* bin/
-%apptest bowtie
-    exec /scif/bowtie/bin/bowtie2 "$@"
+%appenv list
+    export PATH=/usr/games:$PATH  
+%apphelp list
+    This will list the animals available for you to use with "animal"
+    docker run vanessa/cowsay run list
+%apprun list
+    exec cowsay -l
 
-  
-%applabels cufflinks
-    VERSION 2.2.1
-%appinstall cufflinks
-    curl -Lk -o cufflinks.tar.gz   http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/cufflinks-2.2.1.Linux_x86_64.tar.gz
-    tar -xzvf cufflinks.tar.gz
-    mv cufflinks-2.2.1.Linux_x86_64/* bin/
-%apptest cufflinks
-    exec /scif/cufflinks/bin/cufflinks "$@"
-
-
-%applabels tophat
-    VERSION 2.1.0
-%appenv tophat
-    PATH=/scif/apps/bowtie/bin:/usr/bin:$PATH
-%appinstall tophat  
-    curl -Lk -o tophat.tar.gz https://ccb.jhu.edu/software/tophat/downloads/tophat-2.1.0.Linux_x86_64.tar.gz
-    tar -xzvf tophat.tar.gz
-    mv tophat-2.1.0.Linux_x86_64/* bin/
-%apptest tophat
-    exec /scif/tophat/bin/tophat "$@"
+%appenv animal
+    export PATH=/usr/games:$PATH  
+%apphelp animal
+    Select a different animal.
+    docker run vanessa/cowsay run animal hello-hitty
+%apprun animal
+    if [ $# -eq 0 ]
+    then
+        echo "Choose an animal:"
+        exec cowsay -l
+    else
+        exec cowsay -f "${1}"
+    fi

@@ -1,20 +1,23 @@
 # Titles and Descriptions
-title: Pydicom
-description: Learning and resources for Dicom in Python
-logo: "assets/img/logo.gif"
+title: "The Scientific Filesystem Builder"
+description: Build, test, and easily deploy scientific containers
+logo: "assets/img/scif.png"
 
 ## Preview / Development (Leave as is)
-baseurl: "/example.scif"
+baseurl: "/builder"
 host: 127.0.0.1  # the preview server used. Leave as is.
 port: 4005  # the port where the preview is rendered. 
 ##
 
 output: web
-url: "https://vsoch.github.io/example.scif"  # needed for sitemap.xml file only
+url: "https://sci-f.github.io/builder"  # needed for sitemap.xml file only
 
-twitter_username:     EncodeDCC
-github_username:      ENCODE-DCC
-repo: "https://github.com/vsoch/example.scif"
+twitter_username:     vsoch
+github_username:      sci-f
+repo: "https://github.com/sci-f/builder"
+
+# Container name for builder in docs
+container_name: "srcc/scif-builder"
 
 # Exclude
 # these are the files and directories that jekyll will exclude from the build
@@ -27,7 +30,7 @@ feedback_subject_line: Feedback
 feedback_email: vsochat@stanford.edu
 feedback_disable: true
 feedback_text: "Need help?"
-feedback_link: "http://www.github.com/vsoch/example.scif/issues"
+feedback_link: "http://www.github.com/sci-f/builder/issues"
 
 # Collections
 collections:

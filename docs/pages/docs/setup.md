@@ -30,7 +30,7 @@ Github is also great because you can take someone else's code base (for example,
 the upper right of the repository page, and cannot be done programatically. Once forked, you will want to clone the fork of the repo to your computer. Let's say my GitHub username is waffles, and I am using ssh:
 
 ```bash
-git clone git@github.com:waffles/example.scif.git
+git clone git@github.com:waffles/builder.git
 cd example.scif
 ```
 
@@ -45,7 +45,7 @@ The GitHub config file, located at `.git/config`, is the best way to keep track 
               bare = false
               logallrefupdates = true
       [remote "origin"]
-              url = git@github.com:waffles/example.scif
+              url = git@github.com:waffles/builder
               fetch = +refs/heads/*:refs/remotes/origin/*
       [branch "master"]
               remote = origin
@@ -63,10 +63,10 @@ I would want to add the upstream repository, which is where I forked from.
               bare = false
               logallrefupdates = true
       [remote "origin"]
-              url = git@github.com:waffles/example.scif
+              url = git@github.com:waffles/builder
               fetch = +refs/heads/*:refs/remotes/origin/*
       [remote "upstream"]
-              url = https://github.com/vsoch/example.scif
+              url = {{ site.repo }}
               fetch = +refs/heads/*:refs/remotes/origin/*
       [branch "master"]
               remote = origin
@@ -81,4 +81,4 @@ git pull upstream master
 git push origin master
 ```
 
-More instructions for Github are provided in the [Development](development.md) docs. This should be substantial for the initial setup of the repository. Since the entire thing is essentially under development, we will just be working with the master (default) branch, so you shouldn't need to worry about checking out new branches.
+More instructions for Github are provided in the [Development](development) docs. This should be substantial for the initial setup of the repository. Since the entire thing is essentially under development, we will just be working with the master (default) branch, so you shouldn't need to worry about checking out new branches.

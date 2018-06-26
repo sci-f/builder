@@ -3,8 +3,8 @@ FROM continuumio/miniconda3
 ###############################################
 # SciF Base
 #
-# docker build -t vanessa/example.scif .
-# docker run vanessa/example.scif
+# docker build -t vanessa/cowsay .
+# docker run vanessa/cowsay
 #
 ###############################################
 

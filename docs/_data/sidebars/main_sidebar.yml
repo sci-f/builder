@@ -9,7 +9,7 @@ entries:
     output: web, pdf
     folderitems:
 
-    - title: About Encode
+    - title: About SCIF
       url: about
       output: web, pdf
 
@@ -54,6 +54,6 @@ entries:
     output: web, pdf
     folderitems:
 
-    - title: Encode Scientific Container Builder (CI)
-      external_url: https://www.github.com/vsoch/example.scif
+    - title: The Scientific Container Builder (CI)
+      external_url: https://www.github.com/sci-f/builder
       output: web, pdf
