@@ -49,7 +49,7 @@ jobs:
           name: Build Docker image
           no_output_timeout: 60m
           command: |
-            echo "Working directory is ${PWD}
+            echo "Working directory is ${PWD}"
             ls /tmp/src
             # If not set, define CONTAINER_NAME
             if [ ! -n "${CONTAINER_NAME:-}" ]
