@@ -49,9 +49,6 @@ jobs:
           name: Build Docker image
           no_output_timeout: 60m
           command: |
-            echo $PWD
-            ls
-            cd /tmp/src/${CIRCLE_PROJECT_REPONAME}
             echo "Working directory is ${PWD}"
             # If not set, define CONTAINER_NAME
             if [ ! -n "${CONTAINER_NAME:-}" ]
@@ -210,9 +207,6 @@ jobs:
           name: Load Docker image layer cache
           no_output_timeout: 30m
           command: |
-            echo $PWD
-            ls
-            cd /tmp/src/${CIRCLE_PROJECT_REPONAME}
             echo "Working directory is ${PWD}"
             docker info
             set +o pipefail
