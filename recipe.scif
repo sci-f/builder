@@ -48,19 +48,6 @@
         exec cowthink "${@}"
     fi
 
-%apphelp train
-    Provide a message for a a cow to think
-    docker run vanessa/cowsay run cowthink "It's a lovely day for some cheese."
-%appenv train
-    export PATH=/usr/games:$PATH
-%apprun train
-    exec sl 
-%apphelp train
-    Choo choo!
-    docker run vanessa/cowsay run train
-%apptest train
-    exec sl
-
 %apphelp message
     Print a cool message in a banner to the console
     docker run vanessa/cowsay run message
