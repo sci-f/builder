@@ -49,11 +49,14 @@ jobs:
           name: Build Docker image
           no_output_timeout: 60m
           command: |
+            echo "Working directory is ${PWD}
+            ls /tmp/src
             # If not set, define CONTAINER_NAME
             if [ ! -n ${CONTAINER_NAME:-} ]
                 then
                     CONTAINER_NAME="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
             fi
+            echo "Container name is ${CONTAINER_NAME}"
             # Build docker image
             e=1 && for i in {1..5}; do
               docker build \
