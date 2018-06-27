@@ -52,7 +52,7 @@ jobs:
             echo "Working directory is ${PWD}
             ls /tmp/src
             # If not set, define CONTAINER_NAME
-            if [ ! -n ${CONTAINER_NAME:-} ]
+            if [ ! -n "${CONTAINER_NAME:-}" ]
                 then
                     CONTAINER_NAME="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
             fi
@@ -77,7 +77,7 @@ jobs:
           no_output_timeout: 40m
           command: |
             # If not set, define CONTAINER_NAME
-            if [ ! -n ${CONTAINER_NAME:-} ]
+            if [ ! -n "${CONTAINER_NAME:-}" ]
                 then
                     CONTAINER_NAME="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
             fi
@@ -159,7 +159,7 @@ jobs:
           no_output_timeout: 2h
           command: |
             # If not set, define CONTAINER_NAME
-            if [ ! -n ${CONTAINER_NAME:-} ]
+            if [ ! -n "${CONTAINER_NAME:-}" ]
                 then
                     CONTAINER_NAME="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
             fi
@@ -171,7 +171,7 @@ jobs:
           no_output_timeout: 2h
           command: |
             # If not set, define CONTAINER_NAME
-            if [ ! -n ${CONTAINER_NAME:-} ]
+            if [ ! -n "${CONTAINER_NAME:-}" ]
                 then
                     CONTAINER_NAME="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
             fi
@@ -185,7 +185,7 @@ jobs:
           no_output_timeout: 2h
           command: |
             # If not set, define CONTAINER_NAME
-            if [ ! -n ${CONTAINER_NAME:-} ]
+            if [ ! -n "${CONTAINER_NAME:-}" ]
                 then
                     CONTAINER_NAME="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
             fi
@@ -220,7 +220,7 @@ jobs:
           no_output_timeout: 40m
           command: |
             # If not set, define CONTAINER_NAME
-            if [ ! -n ${CONTAINER_NAME:-} ]
+            if [ ! -n "${CONTAINER_NAME:-}" ]
                 then
                     CONTAINER_NAME="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
             fi
