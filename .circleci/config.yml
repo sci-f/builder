@@ -70,7 +70,7 @@ jobs:
             # SCIF VERSION
             THISVERSION=$(docker run "${CONTAINER_NAME}" version)
             echo "SCIF Version is ${THISVERSION}"
-            echo "${CIRCLE_TAG:-$THISVERSION}" > ${CIRCLE_PROJECT_REPONAME}/VERSION
+            echo "${CIRCLE_TAG:-$THISVERSION}" > VERSION
       - run:
           name: Docker save
           no_output_timeout: 40m
