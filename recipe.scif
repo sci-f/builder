@@ -19,7 +19,7 @@
 %appenv animal
     export PATH=/usr/games:$PATH  
 %apptest animal
-    exec cowsay -f vader-koala
+    exec cowsay -f "vader-koala"
 %apphelp animal
     Select a different animal.
     docker run vanessa/cowsay run animal hello-hitty
@@ -63,6 +63,8 @@
         exec figlet "${@}"
     fi
 
+%appenv fortune
+    export PATH=/usr/games:$PATH
 %appinstall fortune
     apt-get install -y fortune
 %apptest fortune
