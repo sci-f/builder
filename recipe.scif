@@ -66,6 +66,8 @@
     docker run vanessa/cowsay run message
 %appinstall message
     apt-get install -y figlet
+%apptest message
+    exec figlet "Avocado4Life"
 %apprun message
     if [ $# -eq 0 ]
     then
@@ -76,6 +78,8 @@
 
 %appinstall fortune
     apt-get install -y fortune
+%apptest fortune
+    exec fortune -s
 %apprun fortune
     if [ $# -eq 0 ]
     then
