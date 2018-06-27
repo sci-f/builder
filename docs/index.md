@@ -36,6 +36,7 @@ After setup, you will still want to add new features and otherwise update your s
  - [Example](example.md): a concrete usage example for the recipe provided in this repository, which has samtools, cufflinks, tophat, and bowtie.
 
 ## Additional Resources
+ - [Tutorial](http://127.0.0.1:4000/2018/scientific-filesystem-builder/): An additional blog post that walks through how to customize your build.
  - [https://sci-f.github.io](https://sci-f.github.io) Scientific Filesystem documentation base
  - [Scientific Filesystem Publication](https://academic.oup.com/gigascience/article/7/5/giy023/4931737) in Gigascience
  - [Background](background.md) a bit of background about why we would want to use SCIF in containers, if you don't want to look over the manuscript.
