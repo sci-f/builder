@@ -6,15 +6,6 @@
 %apptest md5sum
     exec md5sum "$@"
 
-%appenv cowsay
-    export PATH=/usr/games:$PATH
-%applabels cowsay
-    THECOWSAYS MOO
-%appinstall cowsay
-    apt-get update && apt-get install -y cowsay
-%apptest cowsay
-    exec cowsay "$@"
-
 %appenv list
     export PATH=/usr/games:$PATH  
 %apphelp list
@@ -41,6 +32,10 @@
         exec cowsay -f "${1}"
     fi
 
+%applabels cowthink
+    THECOWSAYS MOO
+%appinstall cowthink
+    apt-get update && apt-get install -y cowsay
 %appenv cowthink
     export PATH=/usr/games:$PATH
 %apptest cowthink
