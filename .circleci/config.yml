@@ -1,8 +1,9 @@
 version: 2
 jobs:
 
-  # REPO_BASE and CONTAINER_NAME should be set in the different jobs here,
-  # or globally in the repo environment variables
+  # If you want to deploy your container to Docker Hub, you must
+  #  1. define the CONTAINER_NAME environment variable for the project 
+  #  2. Also define DOCKER_USER and DOCKER_PASS
   setup:
     environment:
       - TZ: "/usr/share/zoneinfo/America/Los_Angeles"
@@ -48,6 +49,11 @@ jobs:
           name: Build Docker image
           no_output_timeout: 60m
           command: |
+            # If not set, define CONTAINER_NAME
+            if [ ! -n ${CONTAINER_NAME:-} ]
+                then
+                    CONTAINER_NAME="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
+            fi
             # Build docker image
             e=1 && for i in {1..5}; do
               docker build \
@@ -67,6 +73,11 @@ jobs:
           name: Docker save
           no_output_timeout: 40m
           command: |
+            # If not set, define CONTAINER_NAME
+            if [ ! -n ${CONTAINER_NAME:-} ]
+                then
+                    CONTAINER_NAME="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
+            fi
             echo "Saving ${CONTAINER_NAME} to container.tar.gz"
             mkdir -p /tmp/cache
             docker save ${CONTAINER_NAME}:latest \
@@ -144,6 +155,11 @@ jobs:
           name: List SCIF Apps
           no_output_timeout: 2h
           command: |
+            # If not set, define CONTAINER_NAME
+            if [ ! -n ${CONTAINER_NAME:-} ]
+                then
+                    CONTAINER_NAME="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
+            fi
             echo "The applications installed in this container are:"
             docker run -it --rm=false \
               ${CONTAINER_NAME}:latest apps
@@ -151,6 +167,11 @@ jobs:
           name: Show SCIF Help
           no_output_timeout: 2h
           command: |
+            # If not set, define CONTAINER_NAME
+            if [ ! -n ${CONTAINER_NAME:-} ]
+                then
+                    CONTAINER_NAME="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
+            fi
             echo "The help for each app is the following:"
             for app in $(docker run -it --rm=false ${CONTAINER_NAME}:latest apps); 
                 do
@@ -160,6 +181,11 @@ jobs:
           name: Run SCIF Tests
           no_output_timeout: 2h
           command: |
+            # If not set, define CONTAINER_NAME
+            if [ ! -n ${CONTAINER_NAME:-} ]
+                then
+                    CONTAINER_NAME="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
+            fi
             echo "Testing each installed SCIF app:"
             for app in $(docker run -it --rm=false ${CONTAINER_NAME}:latest apps); 
                 do
@@ -190,6 +216,11 @@ jobs:
           name: Upload Metadata or Result
           no_output_timeout: 40m
           command: |
+            # If not set, define CONTAINER_NAME
+            if [ ! -n ${CONTAINER_NAME:-} ]
+                then
+                    CONTAINER_NAME="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
+            fi
             echo "Here we could upload metadata, for example:"
             docker run -it ${CONTAINER_NAME}:latest inspect
       - run:
@@ -197,14 +228,19 @@ jobs:
           no_output_timeout: 40m
           command: |
             echo "Looking for Docker deployment options"
-            if [[ -n "$DOCKER_PASS" ]]; then
-              docker login -u $DOCKER_USER -p $DOCKER_PASS
-              docker push ${CONTAINER_NAME}:latest
-              #TODO: we need to have some version/tag standard here
-              #docker tag ${CONTAINER_NAME} ${CONTAINER_NAME}:$CIRCLE_TAG
-              #docker push ${CONTAINER_NAME}:$CIRCLE_TAG
+            if [[ -n "$CONTAINER_NAME" ]]; then
+                 echo "Please define the CONTAINER_NAME project environment variable"
+                 echo "that is the username/reponame:tag of the container to build on"
+                 echo "Docker Hub. Thank you!"
+            else
+                if [[ -n "$DOCKER_PASS" ]]; then
+                  docker login -u $DOCKER_USER -p $DOCKER_PASS
+                  docker push ${CONTAINER_NAME}:latest
+                  #TODO: we need to have some version/tag standard here
+                  #docker tag ${CONTAINER_NAME} ${CONTAINER_NAME}:$CIRCLE_TAG
+                  #docker push ${CONTAINER_NAME}:$CIRCLE_TAG
+                fi
             fi
-
 workflows:
   version: 2
   build_test_deploy:
