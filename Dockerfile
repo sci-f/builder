@@ -8,6 +8,8 @@ FROM continuumio/miniconda3
 #
 ###############################################
 
+ENV DEBIAN_FRONTEND noninteractive
+
 # Dependencies
 RUN apt-get update && apt-get install -y wget \
                                          unzip \

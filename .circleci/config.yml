@@ -163,6 +163,7 @@ jobs:
                     CONTAINER_NAME="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
             fi
             echo "The applications installed in this container are:"
+            echo "Container name set to ${CONTAINER_NAME}"
             docker run -it --rm=false \
               ${CONTAINER_NAME}:latest apps
       - run:
@@ -174,8 +175,9 @@ jobs:
                 then
                     CONTAINER_NAME="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
             fi
+            echo "Container name set to ${CONTAINER_NAME}"
             echo "The help for each app is the following:"
-            for app in $(docker run -it --rm=false ${CONTAINER_NAME}:latest apps); 
+            for app in $(docker run --rm=false ${CONTAINER_NAME}:latest apps); 
                 do
                     docker run -it --rm=false ${CONTAINER_NAME}:latest help ${app}
                 done
@@ -188,9 +190,11 @@ jobs:
                 then
                     CONTAINER_NAME="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
             fi
+            echo "Container name set to ${CONTAINER_NAME}"
             echo "Testing each installed SCIF app:"
-            for app in $(docker run -it --rm=false ${CONTAINER_NAME}:latest apps); 
+            for app in $(docker run --rm=false ${CONTAINER_NAME}:latest apps); 
                 do
+                    echo "Testing ${app}"
                     docker run -it --rm=false ${CONTAINER_NAME}:latest test ${app}
                 done
       - store_test_results:
