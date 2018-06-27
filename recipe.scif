@@ -20,11 +20,15 @@
 %apphelp list
     This will list the animals available for you to use with "animal"
     docker run vanessa/cowsay run list
+%apptest list
+    exec cowsay -l
 %apprun list
     exec cowsay -l
 
 %appenv animal
     export PATH=/usr/games:$PATH  
+%apptest animal
+    exec cowsay -f vader-koala
 %apphelp animal
     Select a different animal.
     docker run vanessa/cowsay run animal hello-hitty
@@ -35,4 +39,52 @@
         exec cowsay -l
     else
         exec cowsay -f "${1}"
+    fi
+
+%appenv cowthink
+    export PATH=/usr/games:$PATH
+%apptest cowthink
+    exec cowthink Cowthink successful test
+%apprun cowthink
+    if [ $# -eq 0 ]
+    then
+        exec cowthink "It's a lovely day for some cheese."
+    else
+        exec cowthink "${@}"
+    fi
+
+%apphelp train
+    Provide a message for a a cow to think
+    docker run vanessa/cowsay run cowthink "It's a lovely day for some cheese."
+%appenv train
+    export PATH=/usr/games:$PATH
+%apprun train
+    exec sl 
+%apphelp train
+    Choo choo!
+    docker run vanessa/cowsay run train
+%apptest train
+    exec sl
+
+%apphelp message
+    Print a cool message in a banner to the console
+    docker run vanessa/cowsay run message
+%appinstall message
+    apt-get install -y figlet
+%apprun message
+    if [ $# -eq 0 ]
+    then
+        exec figlet "Rawwwr!"
+    else
+        exec figlet "${@}"
+    fi
+
+%appinstall fortune
+    apt-get install -y fortune
+%apprun fortune
+    if [ $# -eq 0 ]
+    then
+        exec fortune -s
+    else
+        exec fortune -s
     fi

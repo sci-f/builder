@@ -1,15 +1,24 @@
 version: 2
 jobs:
 
+  # REPO_BASE and CONTAINER_NAME should be set in the different jobs here,
+  # or globally in the repo environment variables
+  setup:
+    environment:
+      - TZ: "/usr/share/zoneinfo/America/Los_Angeles"
+    docker:
+      - image: docker:18.01.0-ce-git
+    steps:
+      - run:
+          name: Test if the user has defined the repo name 
+          command: apk add --no-cache pigz python3
+
   build:
     environment:
       - TZ: "/usr/share/zoneinfo/America/Los_Angeles"
-      - CONTAINER_NAME: "vanessa/example.scif"
-      - REPO_BASE: "builder"
-
     docker:
       - image: docker:18.01.0-ce-git
-    working_directory: /tmp/src/${BUILDER}
+    working_directory: /tmp/src/${CIRCLE_PROJECT_REPONAME}
     steps:
       - run:
           name: Install parallel gzip and python3
@@ -51,14 +60,9 @@ jobs:
               && e=0 && break || sleep 15
             done && [ "$e" -eq "0" ]
             # SCIF VERSION
-            #THISVERSION=$( python3 get_version.py )
-            #if [[ ${THISVERSION:0:1} == "0" ]] ; then
-            #  echo "WARNING: latest git tag could not be found"
-            #  echo "Please, make sure you fetch all tags from upstream with"
-            #  echo "the command ``git fetch --tags --verbose`` and push"
-            #  echo "them to your fork with ``git push origin --tags``"
-            #fi
-            #echo "${CIRCLE_TAG:-$THISVERSION}" > example.scif/VERSION
+            THISVERSION=$(docker run "${CONTAINER_NAME}" version)
+            echo "SCIF Version is ${THISVERSION}"
+            echo "${CIRCLE_TAG:-$THISVERSION}" > ${CIRCLE_PROJECT_REPONAME}/VERSION
       - run:
           name: Docker save
           no_output_timeout: 40m
@@ -71,14 +75,13 @@ jobs:
           root: /tmp
           paths:
             - cache/container.tar.gz
-            - src/example.scif
+            - src/${CIRCLE_PROJECT_REPONAME}
 
   get_data:
     machine:
       # Ubuntu 14.04 with Docker 17.10.0-ce
       image: circleci/classic:201711-01
-    environment:
-      - TZ: "/usr/share/zoneinfo/America/Los_Angeles"
+
     working_directory: /home/circleci/data
     steps:
       - restore_cache:
@@ -122,8 +125,6 @@ jobs:
   test_apps:
     machine:
       image: circleci/classic:201711-01
-    environment:
-      - CONTAINER_NAME: "vanessa/example.scif"
     working_directory: /home/circleci/out/tests
     steps:
       - attach_workspace:
@@ -170,8 +171,6 @@ jobs:
   deploy:
     machine:
       image: circleci/classic:201711-01
-    environment:
-      - CONTAINER_NAME: "vanessa/example.scif"    
     working_directory: /tmp/src/example.scif
     steps:
       - attach_workspace:
@@ -253,6 +252,6 @@ workflows:
             - test_apps
           filters:
             branches:
-              ignore: /docs?\/.*/
+              only: master
             tags:
               only: /.*/
