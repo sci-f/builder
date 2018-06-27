@@ -19,7 +19,7 @@ jobs:
       - TZ: "/usr/share/zoneinfo/America/Los_Angeles"
     docker:
       - image: docker:18.01.0-ce-git
-    working_directory: /tmp/src/${CIRCLE_PROJECT_REPONAME}
+    working_directory: /tmp/src
     steps:
       - run:
           name: Install parallel gzip and python3
@@ -49,8 +49,8 @@ jobs:
           name: Build Docker image
           no_output_timeout: 60m
           command: |
+            cd ${CIRCLE_PROJECT_REPONAME}
             echo "Working directory is ${PWD}"
-            ls /tmp/src
             # If not set, define CONTAINER_NAME
             if [ ! -n "${CONTAINER_NAME:-}" ]
                 then
@@ -89,7 +89,7 @@ jobs:
           root: /tmp
           paths:
             - cache/container.tar.gz
-            - src/${CIRCLE_PROJECT_REPONAME}
+            - src
 
   get_data:
     machine:
@@ -127,7 +127,7 @@ jobs:
     machine:
       # Ubuntu 14.04 with Docker 17.10.0-ce
       image: circleci/classic:201711-01
-    working_directory: /tmp/src/example.scif
+    working_directory: /tmp/src
     steps:
       - attach_workspace:
           at: /tmp
@@ -200,7 +200,7 @@ jobs:
   deploy:
     machine:
       image: circleci/classic:201711-01
-    working_directory: /tmp/src/example.scif
+    working_directory: /tmp/src
     steps:
       - attach_workspace:
           at: /tmp
@@ -208,6 +208,8 @@ jobs:
           name: Load Docker image layer cache
           no_output_timeout: 30m
           command: |
+            cd ${CIRCLE_PROJECT_REPONAME}
+            echo "Working directory is ${PWD}"
             docker info
             set +o pipefail
             if [ -f /tmp/cache/container.tar.gz ]; then
