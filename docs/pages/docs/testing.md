@@ -41,7 +41,7 @@ Given that these variables are found, a container will be pushed to Docker Hub o
 build tag. If not, it will just skip over the step. This is how others will be able to pull your container from Docker Hub:
 
 ```bash
-docker pull vanessa/example.scif
+docker pull vanessa/cowsay
 ```
 
 ## 2. The Configuration File
@@ -49,13 +49,13 @@ docker pull vanessa/example.scif
 You'll notice the template has a "hidden" directory called `.circleci` with a `config.yml` inside. This is a file that defines the workflow
 to define the steps that we described above. Importantly, you don't need to edit this, because the steps already know
 to build your container from your Dockerfile, and how to interact with it via issuing commands to the scientific filesystem.
-All you need to do is write tests for your applications, and this is done in the [recipe.scif](https://github.com/vsoch/example.scif/blob/master/recipe.scif)
+All you need to do is write tests for your applications, and this is done in the [recipe.scif](https://github.com/vsoch/cowsay/blob/master/recipe.scif)
 
 ## Step 1: Write tests
 The testing section discovers the apps in your container like this:
 
 ```bash
-$ docker run -it vanessa/example.scif apps
+$ docker run -it vanessa/cowsay apps
  cufflinks
   samtools
     bowtie
@@ -65,9 +65,9 @@ $ docker run -it vanessa/example.scif apps
 And then logically we can loop through these apps, and run the test for each!
 
 ```bash
-$ for app in $(docker run -it vanessa/example.scif apps)
+$ for app in $(docker run -it vanessa/cowsay apps)
     do
-        docker run -it vanessa/example.scif test ${app} 
+        docker run -it vanessa/cowsay test ${app} 
     done
 ```
 

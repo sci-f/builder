@@ -9,8 +9,8 @@ How do you use a container with a scientific filesystem? Here we will use the co
 or pull it.
 
 ```bash
-docker pull vanessa/example.scif
-docker build -t vanessa/example.scif .
+docker pull vanessa/cowsay
+docker build -t vanessa/cowsay .
 ```
 
 For each of the following examples, we show commands with Docker and with a Singularity container called `example.simg`. 
@@ -19,7 +19,7 @@ For each of the following examples, we show commands with Docker and with a Sing
 If we want to interact with our filesystem, we can just run the container:
 
 ```
-$ docker run vanessa/example.scif
+$ docker run vanessa/cowsay
 $ ./rnatoy
 ```
 ```
@@ -61,7 +61,7 @@ this works because the scif is the entrypoint to the container.
 The strength of SCIF is that it will always show you the applications installed in a container, and then provide predictable commands for inspecting, running, or otherwise interacting with them. For example, if I find the container, without any prior knowledge I can reveal the applications inside:
 
 ```
-$ docker run vanessa/example.scif apps
+$ docker run vanessa/cowsay apps
 $ ./example.simg apps
 ```
 ```
@@ -74,7 +74,7 @@ $ ./example.simg apps
 We can look at an application in detail, including asking for help:
 
 ```
-$ docker run vanessa/example.scif help samtools
+$ docker run vanessa/cowsay help samtools
 $ ./example.simg help samtools
 ```
 ```
@@ -84,7 +84,7 @@ $ ./example.simg help samtools
 and then inspecting
 
 ```
-$ docker run vanessa/example.scif inspect samtools
+$ docker run vanessa/cowsay inspect samtools
 $ ./example.simg inspect samtools
 ```
 ```
@@ -112,7 +112,7 @@ I can easily shell into the container in the context of an application, meaning 
 environment is sourced, etc. 
 
 ```
-$ docker run -it vanessa/example.scif shell samtools
+$ docker run -it vanessa/cowsay shell samtools
 $ ./example.simg shell samtools
 ```
 ```
@@ -125,7 +125,7 @@ PATH=/scif/apps/samtools/bin:/opt/conda/bin:/usr/local/sbin:/usr/local/bin:/usr/
 Notice how I'm in the app's context (in it's application folder) and that it's bin is added to the path? I can also shell in without a specific application context, but still have all the SCIF [global variables](https://sci-f.github.io/spec-v1#environment-namespace) available to me.
 
 ```
-$ docker run -it vanessa/example.scif shell
+$ docker run -it vanessa/cowsay shell
 $ ./example.simg shell
 ```
 ```
@@ -139,7 +139,7 @@ data
 The same kind of functionality exists with the python shell, `pyshell`, but you interact directly with the scif client:
 
 ```
-$ docker run -it vanessa/example.scif pyshell
+$ docker run -it vanessa/cowsay pyshell
 $ ./example.simg pyshell
 ```
 ```
@@ -162,7 +162,7 @@ client.apps()
 Before we get into creating a pipeline, look how easy it is to run an application. Without scif, we would have to have known that samtools is installed, and then executed the command to the container. But with the scientific filesystem, we discovered the app (shown above) and then we can just run it. The `run` command maps to the entrypoint, as was defined by the creator:
 
 ```
-$ docker run vanessa/example.scif run samtools
+$ docker run vanessa/cowsay run samtools
 $ ./example.simg run samtools
 ```
 ```
@@ -195,8 +195,8 @@ Command: view        SAM<->BAM conversion
 And executing any command in the context of the application is possible too:
 
 ```
-$ docker run vanessa/example.scif exec samtools env | grep PATH
-$ ./example.scif exec samtools env | grep PATH
+$ docker run vanessa/cowsay exec samtools env | grep PATH
+$ ./cowsay exec samtools env | grep PATH
 ```
 ```
 LD_LIBRARY_PATH=/scif/apps/samtools/lib

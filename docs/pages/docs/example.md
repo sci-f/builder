@@ -1,5 +1,5 @@
 ---
-title: RNA-Seq Example
+title: Cowsay Example
 sidebar: main_sidebar
 permalink: example
 folder: docs
@@ -9,8 +9,8 @@ folder: docs
 Let's walk through using the container that is provided by this repository. As a reminder, here is how we built it:
 
 ```bash
-docker pull vanessa/example.scif
-docker build -t vanessa/example.scif .
+docker pull vanessa/cowsay
+docker build -t vanessa/cowsay .
 ```
 
 Now let's review examples of how to run each of the applications using SCIF with the container. For the following steps, scif ensures that `/scif/data` exists in the container, so we can use it as a working directory (to mount from the hose) if needed. The weird name is chosen specifically to ensure that the same path doesn't exist on the host you
@@ -34,7 +34,7 @@ genome=/scif/data/ggal_1_48850000_49020000.Ggal71.500bpflank.fa
 genomeIndex=${genome}.index
 ```
 ```
-docker run -v $PWD/data/ggal:/scif/data vanessa/example.scif exec bowtie bowtie2-build --threads 1 $genome $genomeIndex
+docker run -v $PWD/data/ggal:/scif/data vanessa/cowsay exec bowtie bowtie2-build --threads 1 $genome $genomeIndex
 singularity run -B $PWD/data/ggal:/scif/data rnatoy exec bowtie bowtie2-build --threads 1 $genome $genomeIndex
 ```
 
@@ -61,6 +61,6 @@ reads="/scif/data/ggal_gut_1.fq /scif/data/ggal_gut_2.fq /scif/data/ggal_liver_1
 annot=/scif/data/ggal_1_48850000_49020000.bed.gff
 ```
 ```
-docker run -v $PWD/data/ggal:/scif/data vanessa/example.scif exec tophat tophat2 -p 1 --GTF $annot $genomeIndex $reads
+docker run -v $PWD/data/ggal:/scif/data vanessa/cowsay exec tophat tophat2 -p 1 --GTF $annot $genomeIndex $reads
 singularity run -B $PWD/data/ggal:/scif/data example.simg exec tophat tophat2 -p 1 --output-dir /scif/data --GTF $annot $genomeIndex $reads
 ```
