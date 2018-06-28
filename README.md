@@ -1,7 +1,9 @@
 # Scientific Filesystem Container Builder
 
-[![scif](https://img.shields.io/badge/filesystem-scientific-green.svg?style=for-the-badge)](https://sci-f.github.io)
-[![CircleCI](https://circleci.com/gh/sci-f/builder.svg?style=svg)](https://circleci.com/gh/sci-f/builder)
+ - [![scif](https://img.shields.io/badge/filesystem-scientific-green.svg?style=for-the-badge)](https://sci-f.github.io)
+ - [![CircleCI](https://circleci.com/gh/sci-f/builder.svg?style=svg)](https://circleci.com/gh/sci-f/builder)
+ - [Documentation](https://sci-f.github.io/builder)
+ - [Writeup](https://vsoch.github.io/2018/scientific-filesystem-builder)
 
 ![docs/assets/img/circle.png](docs/assets/img/circle.png)
 
