@@ -33,6 +33,10 @@ DOCKER_USER
 DOCKER_PASS
 ```
 
+Finally, it's likely that your Docker repo is different from your Github, so you should define a `CONTAINER_NAME` in this project environment too. The final three variables will look like this:
+
+![assets/img/envars.png](assets/img/envars.png)
+
 Given that these variables are found, a container will be pushed to Docker Hub on successful build. The tag will be the Circle CI
 build tag. If not, it will just skip over the step. This is how others will be able to pull your container from Docker Hub:
 
