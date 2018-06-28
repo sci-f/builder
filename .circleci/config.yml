@@ -241,15 +241,9 @@ jobs:
                     CONTAINER_NAME="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
             fi
             echo "Container name set to ${CONTAINER_NAME}"
-            if [[ -n "$CONTAINER_NAME" ]]; then
-                 echo "Please define the CONTAINER_NAME project environment variable"
-                 echo "that is the username/reponame:tag of the container to build on"
-                 echo "Docker Hub. Thank you!"
-            else
-                if [[ -n "$DOCKER_PASS" ]]; then
+            if [[ -n "$DOCKER_PASS" ]]; then
                   docker login -u $DOCKER_USER -p $DOCKER_PASS
                   docker push ${CONTAINER_NAME}:latest
-                fi
             fi
 workflows:
   version: 2
