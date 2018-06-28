@@ -235,6 +235,12 @@ jobs:
           no_output_timeout: 40m
           command: |
             echo "Looking for Docker deployment options"
+            # If not set, define CONTAINER_NAME
+            if [ ! -n "${CONTAINER_NAME:-}" ]
+                then
+                    CONTAINER_NAME="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
+            fi
+            echo "Container name set to ${CONTAINER_NAME}"
             if [[ -n "$CONTAINER_NAME" ]]; then
                  echo "Please define the CONTAINER_NAME project environment variable"
                  echo "that is the username/reponame:tag of the container to build on"
@@ -243,9 +249,6 @@ jobs:
                 if [[ -n "$DOCKER_PASS" ]]; then
                   docker login -u $DOCKER_USER -p $DOCKER_PASS
                   docker push ${CONTAINER_NAME}:latest
-                  #TODO: we need to have some version/tag standard here
-                  #docker tag ${CONTAINER_NAME} ${CONTAINER_NAME}:$CIRCLE_TAG
-                  #docker push ${CONTAINER_NAME}:$CIRCLE_TAG
                 fi
             fi
 workflows:
