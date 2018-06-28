@@ -31,7 +31,7 @@ the upper right of the repository page, and cannot be done programatically. Once
 
 ```bash
 git clone git@github.com:waffles/builder.git
-cd example.scif
+cd cowsay
 ```
 
 ## 3. Setup your config
