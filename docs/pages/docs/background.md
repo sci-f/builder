@@ -26,11 +26,4 @@ SCIF Recipe --> Dockerfile --> Dockerfile --> Docker Image
 
 ```
 
-## Addtional Notes
-
-This is some brief (additional) background to give rationale for this approach.
-
- - note the modular nature of the apps, I can now know that the container has bowtie, samtools, without seeing the recipe or listing executables on the path.
- - software install goes into respective bins of the application folder. Before we were installing to opt, and had to add these to the path.
- - Note that for some software, I chose to install from source code in the /scif base, because I can then make a strong assumption that the files there belong to the software. But let's say that I for some reason want to use the system package manager, but still reveal the executable as a scif entrypoint? The apps here show this example with samtools. I define the entry point to execute it.
-
+For additional background, see the <a href="https://vsoch.github.io/2018/scientific-filesystem-builder/" target="_blank">associated post by @vsoch</a>.
