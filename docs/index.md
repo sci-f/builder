@@ -21,22 +21,22 @@ that will ensure your software is packaged, tested, and ready for use! To get st
 
 ## Getting Started
 
- - [1. Clone the Repository](/setup): The first step is to clone this repository to your Github account.
- - [2. Write Your Recipe](/recipes): The container build and testing is driven by defining your Scientific Filesystem in a [recipe.scif](recipe.scif)
- - [3. Build a Container](/bulid): (optional) you will likely want to build a container, either to develop or run locally.
- - [4. Testing Criteria](/testing): Once you push to Github, you will need to connect to a Continuous Integration service ([CircleCI](https://circleci.com/gh/sci-f/builder/) is used for this repository.
+ - [1. Clone the Repository]({{ site.github.url }}/setup): The first step is to clone this repository to your Github account.
+ - [2. Write Your Recipe]({{ site.github.url }}/recipes): The container build and testing is driven by defining your Scientific Filesystem in a [recipe.scif](https://github.com/sci-f/builder/blob/master/recipe.scif)
+ - [3. Build a Container]({{ site.github.url }}/bulid): (optional) you will likely want to build a container, either to develop or run locally.
+ - [4. Testing Criteria]({{ site.github.url }}/testing): Once you push to Github, you will need to connect to a Continuous Integration service ([CircleCI](https://circleci.com/gh/sci-f/builder/) is used for this repository.
 
 After you write your recipe, making sure to add your scripts and other dependencies to this repository, connect it to test on Circle, and the tests pass, the container will be deployed for others to use.
 
 ## Continued Development
 After setup, you will still want to add new features and otherwise update your software. But since others are likely using it, you need to do this carefully! Here we will give some advice to do this.
 
- - [Github Development](/development): if you aren't familiar with the Github flow to checkout branches for new features and changes.
- - [Using the Container](/usage): How to interact with the SCIF in your container, after you've developed it.
- - [Example](example.md): a concrete usage example for the recipe provided in this repository, which has samtools, cufflinks, tophat, and bowtie.
+ - [Github Development]({{ site.github.url }}/development): if you aren't familiar with the Github flow to checkout branches for new features and changes.
+ - [Using the Container]({{ site.github.url }}/usage): How to interact with the SCIF in your container, after you've developed it.
+ - [Example]({{ site.github.url }}/example): a concrete usage example for the recipe provided in this repository, which has samtools, cufflinks, tophat, and bowtie.
 
 ## Additional Resources
- - [Tutorial](http://127.0.0.1:4000/2018/scientific-filesystem-builder/): An additional blog post that walks through how to customize your build.
+ - [Tutorial](https://vsoch.github.io/2018/scientific-filesystem-builder/): An additional blog post that walks through how to customize your build.
  - [https://sci-f.github.io](https://sci-f.github.io) Scientific Filesystem documentation base
  - [Scientific Filesystem Publication](https://academic.oup.com/gigascience/article/7/5/giy023/4931737) in Gigascience
  - [Background](background.md) a bit of background about why we would want to use SCIF in containers, if you don't want to look over the manuscript.
