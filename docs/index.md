@@ -23,7 +23,7 @@ that will ensure your software is packaged, tested, and ready for use! To get st
 
  - [1. Clone the Repository]({{ site.github.url }}/setup): The first step is to clone this repository to your Github account.
  - [2. Write Your Recipe]({{ site.github.url }}/recipes): The container build and testing is driven by defining your Scientific Filesystem in a [recipe.scif](https://github.com/sci-f/builder/blob/master/recipe.scif)
- - [3. Build a Container]({{ site.github.url }}/bulid): (optional) you will likely want to build a container, either to develop or run locally.
+ - [3. Build a Container]({{ site.github.url }}/build): (optional) you will likely want to build a container, either to develop or run locally.
  - [4. Testing Criteria]({{ site.github.url }}/testing): Once you push to Github, you will need to connect to a Continuous Integration service ([CircleCI](https://circleci.com/gh/sci-f/builder/) is used for this repository.
 
 After you write your recipe, making sure to add your scripts and other dependencies to this repository, connect it to test on Circle, and the tests pass, the container will be deployed for others to use.
